@@ -1,17 +1,20 @@
 {
-    "name": "Node.js TypeScript Development",
+    "name": "site2pdf Development Container",
     
-    // Use a Dockerfile to build the container image
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": "."
+    // Use a pre-built image with Node.js 18 and Debian Bullseye
+    "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:18-bullseye",
+    
+    // Specify additional features if needed (optional)
+    "features": {
+        // Example: Install Puppeteer with Chromium
+        "ghcr.io/devcontainers/features/puppeteer:1": {
+            "installChromium": "true"
+        }
     },
     
-    // Configure tool-specific properties.
+    // Customize VS Code settings and extensions
     "customizations": {
-        // Configure properties specific to VS Code.
         "vscode": {
-            // Set *default* container specific settings.json values on container create.
             "settings": {
                 // TypeScript configuration
                 "typescript.tsdk": "node_modules/typescript/lib",
@@ -32,8 +35,6 @@
                     ".biomecache": true
                 }
             },
-    
-            // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "dbaeumer.vscode-eslint",
                 "esbenp.prettier-vscode",
@@ -45,18 +46,28 @@
         }
     },
     
-    // Forward necessary ports (if any)
-    // "forwardPorts": [],
+    // Forward necessary ports (if your application exposes any)
+    // "forwardPorts": [3000],
     
-    // Run commands after the container is created
-    "postCreateCommand": "npm install",
+    // Define environment variables (if needed)
+    // "remoteEnv": {
+    //     "API_KEY": "${env:API_KEY}"
+    // },
+    
+    // Install additional system dependencies and project dependencies
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libxkbcommon0 libnss3 libxss1 libasound2 fonts-liberation libappindicator3-1 libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libgbm-dev && git config --global --add safe.directory ${containerWorkspaceFolder} && npm install",
     
     // Run commands after the container starts
-    "postStartCommand": "npm run build",
+    "postStartCommand": "npm run build && pre-commit install",
     
-    // Fix for Git safe directory ownership
-    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && npm install",
+    // Specify the default user
+    "remoteUser": "vscode",
     
-    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-    "remoteUser": "vscode"
+    // Optional: Mount additional volumes if needed
+    // "mounts": [
+    //     "source=volume-name,target=/path/in/container,type=volume"
+    // ],
+    
+    // Optional: Override the workspace folder
+    // "workspaceFolder": "/workspace"
 }
