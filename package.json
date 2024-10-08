@@ -20,7 +20,10 @@
 		"type": "git",
 		"url": "https://github.com/laiso/site2pdf.git"
 	},
-	"keywords": ["crawler", "PDF"],
+	"keywords": [
+		"crawler",
+		"PDF"
+	],
 	"homepage": "https://github.com/laiso/site2pdf#readme",
 	"bugs": {
 		"url": "https://github.com/laiso/site2pdf/issues"
@@ -33,6 +36,8 @@
 		"tsx": "^4.7.2"
 	},
 	"dependencies": {
+		"axios": "^1.7.7",
+		"cheerio": "^1.0.0",
 		"p-limit": "^6.1.0",
 		"pdf-lib": "^1.17.1",
 		"puppeteer": "^22.6.5"
