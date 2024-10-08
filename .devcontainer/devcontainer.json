@@ -50,8 +50,8 @@
     "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libxkbcommon0 libnss3 libxss1 libasound2 fonts-liberation libappindicator3-1 libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libgbm-dev && git config --global --add safe.directory ${containerWorkspaceFolder} && npm install",
 
     // Run commands after the container starts
-    "postStartCommand": "npm run build && pre-commit install"
+    "postStartCommand": "npm run build && pre-commit install",
 
     // Specify the default user
-    //"remoteUser": "vscode"
+    "remoteUser": "vscode"
 }
