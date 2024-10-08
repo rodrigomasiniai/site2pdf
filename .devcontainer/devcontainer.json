@@ -2,7 +2,7 @@
     "name": "site2pdf Development Container",
 
     // Use a pre-built Node.js 18 image with Debian Bullseye
-    "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:18-bullseye",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
 
     // Customize VS Code settings and extensions
     "customizations": {
