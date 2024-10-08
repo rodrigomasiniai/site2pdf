@@ -1,0 +1,62 @@
+{
+    "name": "Node.js TypeScript Development",
+    
+    // Use a Dockerfile to build the container image
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+    
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                // TypeScript configuration
+                "typescript.tsdk": "node_modules/typescript/lib",
+                "editor.formatOnSave": true,
+                
+                // Biome (Linter) configuration
+                "biome.enable": true,
+                "biome.configPath": ".biome.json",
+                
+                // Jest configuration
+                "jest.autoRun": "off",
+                
+                // Exclude certain files and folders from the explorer
+                "files.exclude": {
+                    "node_modules": true,
+                    "dist": true,
+                    ".coverage": true,
+                    ".biomecache": true
+                }
+            },
+    
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "ms-vscode.vscode-typescript-tslint-plugin",
+                "biome.biomedev",
+                "orta.vscode-jest",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+    
+    // Forward necessary ports (if any)
+    // "forwardPorts": [],
+    
+    // Run commands after the container is created
+    "postCreateCommand": "npm install",
+    
+    // Run commands after the container starts
+    "postStartCommand": "npm run build",
+    
+    // Fix for Git safe directory ownership
+    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && npm install",
+    
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode"
+}
